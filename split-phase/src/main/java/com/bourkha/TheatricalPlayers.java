@@ -14,16 +14,16 @@ public class TheatricalPlayers {
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
 
         for (var perf : invoice.performances) {
-            var play = perf.play;
             var thisAmount = 40000;
             if (perf.audience > 30) {
                 thisAmount += 1000 * (perf.audience - 30);
             }
+            totalAmount += thisAmount;
 
+            var play = perf.play;
             var thisCredits = Math.max(perf.audience - 30, 0);
             if ("comedy".equals(play.type)) thisCredits += Math.floor((double) perf.audience / 5);
 
-            totalAmount += thisAmount;
             volumeCredits += thisCredits;
         }
 

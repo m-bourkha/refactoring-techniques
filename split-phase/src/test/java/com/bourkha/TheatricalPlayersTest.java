@@ -6,7 +6,8 @@ import java.util.List;
 
 import static org.approvaltests.Approvals.verify;
 
-public class TheatricalPlayersTest {
+public class
+TheatricalPlayersTest {
 
 
     @Test
