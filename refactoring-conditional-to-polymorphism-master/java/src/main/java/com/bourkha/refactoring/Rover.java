@@ -1,3 +1,5 @@
+package com.bourkha.refactoring;
+
 public class Rover {
 
     private final ReportingModule reportingModule;

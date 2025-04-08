@@ -1,3 +1,5 @@
+package com.bourkha.refactoring;
+
 import java.util.Objects;
 
 public class Point {

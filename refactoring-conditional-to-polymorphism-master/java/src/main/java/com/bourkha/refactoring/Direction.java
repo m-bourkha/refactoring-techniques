@@ -1,3 +1,5 @@
+package com.bourkha.refactoring;
+
 public enum Direction {
     NORTH,
     EAST,
