@@ -1,8 +1,19 @@
 package com.bourkha.refactoring;
 
+import java.util.Objects;
+
 public class Rover {
 
     private final ReportingModule reportingModule;
+
+    public Point getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public Direction getCurrentDirection() {
+        return currentDirection;
+    }
+
     private Point currentPosition;
     private Direction currentDirection;
 
@@ -20,25 +31,20 @@ public class Rover {
 
     public void executeCommands(String commands) {
         for (char command : commands.toCharArray()) {
-            switch (command) {
-                case 'f':
-                    currentPosition = currentPosition.forward(currentDirection);
-                    break;
-                case 'b':
-                    currentPosition = currentPosition.backward(currentDirection);
-                    break;
-                case 'l':
-                    currentDirection = currentDirection.left();
-                    break;
-                case 'r':
-                    currentDirection = currentDirection.right();
-                    break;
-                default:
-                    throw new UnsupportedOperationException("Unsupported command " + command);
+            if (command == 'f' || command == 'b') {
+                currentPosition = Objects.requireNonNull(MovementFactory.movementType(command, this)).move();
+            }
+
+            else if(command == 'r' || command =='l') {
+                currentDirection = Objects.requireNonNull(RotationFactory.getRotationCommand(command, this)).rotate();
+            }
+            else {
+                throw new UnsupportedOperationException("Unsupported command " + command);
             }
         }
 
         reportingModule.reportPosition(currentPosition);
         reportingModule.reportDirection(currentDirection);
     }
+
 }
