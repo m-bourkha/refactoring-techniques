@@ -3,28 +3,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class InMemoryBookRepository {
+public class InMemoryBookRepository implements BookRepository {
+    final Map<String, Book> books = new HashMap<String, Book>();
 
-    private final Map<String, Book> books = new HashMap<>();
-    private final Map<String, List<Book>> byAuthorsCache = new HashMap<>();
+    public InMemoryBookRepository() {
+    }
 
-
+    @Override
     public void add(String isbn, Book book) {
-        byAuthorsCache.clear();
         books.put(isbn, book);
     }
 
-
+    @Override
     public List<Book> byAuthor(String author) {
-        if (byAuthorsCache.containsKey(author)) {
-            return byAuthorsCache.get(author);
-        }
-
-        List<Book> result = books.values()
-            .stream()
-            .filter(book -> book.author.equals(author))
-            .collect(Collectors.toList());
-        byAuthorsCache.put(author, result);
-        return result;
+        return books.values()
+                .stream()
+                .filter(book -> book.author.equals(author))
+                .collect(Collectors.toList());
     }
 }
