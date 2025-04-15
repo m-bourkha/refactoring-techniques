@@ -12,26 +12,11 @@ public class Model {
         addAllIngredients();
         addAllDrinks();
         updateCosts();
-        updateMakeable();
     }
 
     public void restockIngredients() {
         for (Ingredient i : getIngredientList()) {
             i.setStock(10);
-        }
-        updateMakeable();
-    }
-
-    public void updateMakeable() {
-        for (Drink d : getDrinkList()) {
-            Map<String, Integer> currRecipe = d.getRecipe();
-            for (Ingredient i : getIngredientList()) {
-                if (currRecipe.containsKey(i.getName()) && i.getStock() < currRecipe.get(i.getName())) {
-                    d.setMakeable(false);
-                    break;
-                }
-                d.setMakeable(true);
-            }
         }
     }
 
@@ -81,24 +66,23 @@ public class Model {
         Collections.sort(getDrinkList());
     }
 
-    void makeDrink(View view, int dringId) throws IllegalAccessException {
-        if (dringId <= 0 || dringId > getDrinkList().size()) {
+    void makeDrink(View view, int drinkId) throws IllegalAccessException {
+
+        getDrinkBy(drinkId).makeDrink(view, this.getIngredientList());
+
+    }
+
+    private Drink getDrinkBy(int dringId) throws IllegalAccessException {
+        assertDrinkExists(dringId);
+
+        //dynamic drink menu selection
+        return drinkList.get(dringId - 1);
+    }
+
+    private void assertDrinkExists(int dringId) throws IllegalAccessException {
+        if (dringId <= 0 || dringId > drinkList.size()) {
             throw new IllegalAccessException(); //legal, but invalid input
-        } //dynamic drink menu selection
-
-        Drink drink = getDrinkList().get(dringId - 1);
-        if (drink.getMakeable()) {
-            view.displayDispensing(drink);
-            for (Ingredient i : getIngredientList()) {
-                if (drink.getRecipe().containsKey(i.getName())) {
-                    i.setStock(i.getStock() - drink.getRecipe().get(i.getName()));
-                }
-            }
-        } else {
-            view.displayOutOfStack(drink);
         }
-        updateMakeable();
-
     }
 
     public List<Ingredient> getIngredientList() {

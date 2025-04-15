@@ -13,19 +13,19 @@ public class View {
 
         System.out.println("\nMenu:");
         int count = 1;
-        for (Drink d : drinkList) {
-            System.out.printf("%d,%s,$%.2f," + d.getMakeable() + "\n", count, d.getName(), d.getCost());
+        for (Drink drink : drinkList) {
+            System.out.printf("%d,%s,$%.2f," + drink.isMakeable(ingredientList) + "\n", count, drink.getName(), drink.getCost());
             count++;
         }
 
         System.out.print("\nYour selection: ");
     }
 
-    void displayOutOfStack(Drink drink) {
-        System.out.println("Out of stock: " + drink.getName() + "\n");
+    void displayOutOfStack(String name) {
+        System.out.println("Out of stock: " + name + "\n");
     }
 
-    void displayDispensing(Drink drink) {
-        System.out.println("Dispensing: " + drink.getName() + "\n");
+    void displayDispensing(String name) {
+        System.out.println("Dispensing: " + name + "\n");
     }
 }

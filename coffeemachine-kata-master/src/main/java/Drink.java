@@ -1,11 +1,11 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Drink implements Comparable<Drink> {
     private Map<String, Integer> recipe = new HashMap<String, Integer>();//map ingredients to units per
     private String name;
     private double totalCost = 0;
-    private boolean makeable = false;
 
     public Drink(String name, String[] recipe) {
         this.name = name;
@@ -19,7 +19,7 @@ public class Drink implements Comparable<Drink> {
     public void setRecipe(String[] recipe) {
         for (String s : recipe) {
             if (this.recipe.containsKey(s)) {
-                this.recipe.put(s, this.recipe.get(s) + 1);//increment if multiple units
+                this.recipe.put(s, this.neededAmount(s) + 1);//increment if multiple units
             } else {
                 this.recipe.put(s, 1);//insert first occurrence of ingredient
             }
@@ -35,7 +35,6 @@ public class Drink implements Comparable<Drink> {
     }
 
     public void setMakeable(boolean makeable) {
-        this.makeable = makeable;
     }
 
     public Map<String, Integer> getRecipe() {
@@ -50,8 +49,34 @@ public class Drink implements Comparable<Drink> {
         return name;
     }
 
-    public boolean getMakeable() {
-        return makeable;
+    void makeDrink(View view, List<Ingredient> ingredientList) {
+        if (isMakeable(ingredientList)) {
+            view.displayDispensing(name);
+            for (Ingredient ingredient : ingredientList) {
+                if (needed(ingredient)) {
+                    ingredient.consume(neededAmount(ingredient.getName()));
+                }
+            }
+        } else {
+            view.displayOutOfStack(this.getName());
+        }
     }
 
+    public boolean isMakeable(List<Ingredient> ingredientList) {
+        return ingredientList.stream()
+                .filter(this::needed)
+                .allMatch(this::isAvailable);
+    }
+
+    private boolean isAvailable(Ingredient ingredient) {
+        return ingredient.available(neededAmount(ingredient.getName()));
+    }
+
+    private Integer neededAmount(String ingredientName) {
+        return recipe.get(ingredientName);
+    }
+
+    private boolean needed(Ingredient ingredient) {
+        return recipe.containsKey(ingredient.getName());
+    }
 }
