@@ -1,31 +1,23 @@
-import java.util.List;
-
 public class View {
-    void dispalayInvalid(String input) {
-        System.out.print("Invalid selection: " + input + ". Try again: "); //illegal input
-    }
 
-    public void askForSelection(List<Ingredient> ingredientList, List<Drink> drinkList) {
-        System.out.println("Inventory:");
-        for (Ingredient i : ingredientList) {
-            System.out.println(i.getName() + "," + i.getStock());
+    public void askForSelection(CoffeeMachine coffeeMachine) {
+        showMessage("Inventory:");
+        for (Stock stock : coffeeMachine.inventory) {
+            showMessage(stock.getName() + "," + stock.getAmount());
         }
 
-        System.out.println("\nMenu:");
+        showMessage("\nMenu:");
         int count = 1;
-        for (Drink drink : drinkList) {
-            System.out.printf("%d,%s,$%.2f," + drink.isMakeable(ingredientList) + "\n", count, drink.getName(), drink.getCost());
+        for (Drink drink : coffeeMachine.getMenu()) {
+            System.out.printf("%d,%s,$%.2f," + coffeeMachine.canMake(drink) + "\n", count, drink.getName(), coffeeMachine.cost(drink));
             count++;
         }
 
         System.out.print("\nYour selection: ");
     }
 
-    void displayOutOfStack(String name) {
-        System.out.println("Out of stock: " + name + "\n");
+    public void showMessage(String name) {
+        System.out.println(name);
     }
 
-    void displayDispensing(String name) {
-        System.out.println("Dispensing: " + name + "\n");
-    }
 }

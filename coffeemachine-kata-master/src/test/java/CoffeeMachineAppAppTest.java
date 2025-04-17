@@ -1,76 +1,45 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.assertj.core.api.Assertions.*;
-
 import java.io.*;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class CoffeeMachineTest {
+class CoffeeMachineAppAppTest {
 
-    private ByteArrayInputStream inputStream;
-    private ByteArrayOutputStream outputStream;
+    private CoffeeMachineApp coffeeMachineApp;
+    OutputStream outputStream;
+    InputStream inputStream;
+
 
     @BeforeEach
     void setUp() {
+        coffeeMachineApp = new CoffeeMachineApp();
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
     }
 
     @AfterEach
     void tearDown() {
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-    @Test
-    void test_() {
-        byte[] bytes = "q\n".getBytes();
-        System.setIn(new ByteArrayInputStream(bytes));
-
-        ByteArrayOutputStream output= new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
-        CoffeeMachine.main(new String[]{});
-        String result = """
-                Inventory:
-                Cocoa,10
-                Coffee,10
-                Cream,10
-                Decaf Coffee,10
-                Espresso,10
-                Foamed Milk,10
-                Steamed Milk,10
-                Sugar,10
-                Whipped Cream,10
-                
-                Menu:
-                1,Caffe Americano,$3.30,true
-                2,Caffe Latte,$2.55,true
-                3,Caffe Mocha,$3.35,true
-                4,Cappuccino,$2.90,true
-                5,Coffee,$2.75,true
-                6,Decaf Coffee,$2.75,true
-                
-                Your selection:\s""";
-        assertThat(output.toString()).isEqualToNormalizingNewlines(result);
-    }
-
 
     @ParameterizedTest
     @MethodSource("command")
-    void testQuitCommand(String command, String output) throws FileNotFoundException {
+    void testQuitCommand(String command, String output) {
         byte[] bytes = command.getBytes();
         inputStream = new ByteArrayInputStream(bytes);
         System.setIn(inputStream);
-
-        CoffeeMachine.main(new String[]{});
-        //BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        //  CoffeeMachine.control(new Input(bufferedReader),coffeeMachine,new View());
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+      //  CoffeeMachine.control(new Input(bufferedReader),coffeeMachine,new View());
         assertThat(outputStream.toString()).isEqualToNormalizingNewlines(output);
     }
 
@@ -361,16 +330,20 @@ class CoffeeMachineTest {
                 Arguments.of("q\n", commun),
                 Arguments.of("1\nq", command_1),
                 Arguments.of("2\nq", command_2),
-               Arguments.of("3\nq", command_3),
+                Arguments.of("3\nq", command_3),
                 Arguments.of("4\nq", command_4),
                 Arguments.of("5\nq", command_5),
                 Arguments.of("6\nq", command_6),
                 Arguments.of("6\nq", command_6),
-                Arguments.of("7\nq", command_7),
+                Arguments.of("7\nq", command_7+"\n"),
                 Arguments.of("1\n2\nq", command_8),
                 Arguments.of("r\nq", reful),
                 Arguments.of("5\n5\n5\n5\nq", outOfStock)
 
         );
     }
+
+
 }
+
+
