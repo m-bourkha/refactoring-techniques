@@ -2,9 +2,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class InMemoryBookRepositoryTest {
+class CachingDecoratorTest {
 
-    private final InMemoryBookRepository repository = new InMemoryBookRepository();
+    private final CachingDecorator repository = new CachingDecorator(new InMemoryBookRepository());
 
     @Test void
     should_find_book_by_author() {
