@@ -11,36 +11,12 @@ public class Point {
         this.y = y;
     }
 
-    public Point forward(Direction direction) {
-        switch (direction) {
-            case NORTH:
-                return new Point(x, y + 1);
-            case EAST:
-                return new Point(x + 1, y);
-            case SOUTH:
-                return new Point(x, y - 1);
-            case WEST:
-                return new Point(x - 1, y);
-            default:
-                // never invoked
-                throw new IllegalArgumentException("unknown forward direction: " + direction);
-        }
+    public Point forward(Point p) {
+        return new Point(x + p.x, y + p.y);
     }
 
-    public Point backward(Direction direction) {
-        switch(direction) {
-            case NORTH:
-                return new Point(x, y - 1);
-            case EAST:
-                return new Point(x - 1, y);
-            case SOUTH:
-                return new Point(x, y + 1);
-            case WEST:
-                return new Point(x + 1, y);
-            default:
-                // never invoked
-                throw new IllegalArgumentException("unknown backward direction: " + direction);
-        }
+    public Point backward(Point p) {
+        return new Point(x - p.x, y - p.y);
     }
 
     @Override

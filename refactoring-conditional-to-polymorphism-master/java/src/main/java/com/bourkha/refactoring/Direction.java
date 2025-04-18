@@ -1,11 +1,16 @@
 package com.bourkha.refactoring;
 
 public enum Direction {
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST;
+    NORTH(new Point(0, 1)),
+    EAST(new Point(1, 0)),
+    SOUTH(new Point(0, -1)),
+    WEST(new Point(-1, 0));
 
+     final Point vector;
+
+    Direction(Point vector) {
+        this.vector = vector;
+    }
     public Direction left() {
         int left = ordinal() - 1;
         if (left < 0) {
