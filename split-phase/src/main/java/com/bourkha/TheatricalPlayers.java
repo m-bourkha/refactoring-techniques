@@ -2,34 +2,23 @@ package com.bourkha;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.Map;
 
 public class TheatricalPlayers {
 
     public String print(Invoice invoice) {
-        var totalAmount = 0;
-        var volumeCredits = 0;
-        var result = String.format("Statement for %s\n", invoice.customer);
 
+        return printTextInvoice(new InvoiceData(invoice.customer(), invoice.totalAmount(), invoice.earnedCredits()));
+    }
+
+    private static String printTextInvoice(InvoiceData invoiceData) {
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
-
-        for (var perf : invoice.performances) {
-            var play = perf.play;
-            var thisAmount = 40000;
-            if (perf.audience > 30) {
-                thisAmount += 1000 * (perf.audience - 30);
-            }
-
-            var thisCredits = Math.max(perf.audience - 30, 0);
-            if ("comedy".equals(play.type)) thisCredits += Math.floor((double) perf.audience / 5);
-
-            totalAmount += thisAmount;
-            volumeCredits += thisCredits;
-        }
-
-        result += String.format("Amount owed is %s\n", format.format(totalAmount / 100));
-        result += String.format("You earned %s credits\n", volumeCredits);
+        var result = String.format("Statement for %s\n", invoiceData.customer());
+        result += String.format("Amount owed is %s\n", format.format(invoiceData.totalAmount() / 100));
+        result += String.format("You earned %s credits\n", invoiceData.earnedCredits());
         return result;
     }
 
+    private  record InvoiceData(String customer, int totalAmount, int earnedCredits) {
+
+    }
 }
