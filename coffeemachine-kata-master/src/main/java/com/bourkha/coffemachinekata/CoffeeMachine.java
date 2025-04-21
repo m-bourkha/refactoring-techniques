@@ -1,3 +1,5 @@
+package com.bourkha.coffemachinekata;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -31,16 +33,16 @@ public class CoffeeMachine {
         return inventory.canMake(drink) ;
     }
 
-    public Drink findDrinkById(int dringId) throws IllegalAccessException {
+    public Drink findDrinkById(int dringId) {
         assertDrinkExists(dringId);
 
         //dynamic drink menu selection
         return menu.get(dringId - 1);
     }
 
-    private void assertDrinkExists(int dringId) throws IllegalAccessException {
+    private void assertDrinkExists(int dringId) {
         if (dringId <= 0 || dringId > menu.size()) {
-            throw new IllegalAccessException(); //legal, but invalid input
+            throw new IllegalArgumentException("Ivalid Command"); //legal, but invalid input
         }
     }
 

@@ -1,3 +1,5 @@
+package com.bourkha.coffemachinekata;
+
 public class Stock implements Comparable<Stock> {
     private String name = "";
     private double cost = 0.00;

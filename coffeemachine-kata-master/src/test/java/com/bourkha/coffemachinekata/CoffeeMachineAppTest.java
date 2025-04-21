@@ -1,3 +1,5 @@
+package com.bourkha.coffemachinekata;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -36,7 +38,7 @@ class CoffeeMachineAppTest {
         System.setOut(new PrintStream(output));
         CoffeeMachineApp.main(new String[]{});
         String result = """
-                Inventory:
+                com.bourkha.coffemachinekata.Inventory:
                 Cocoa,10
                 Coffee,10
                 Cream,10
@@ -69,12 +71,12 @@ class CoffeeMachineAppTest {
 
         CoffeeMachineApp.main(new String[]{});
         //BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        //  CoffeeMachine.control(new Input(bufferedReader),coffeeMachine,new View());
+        //  com.bourkha.coffemachinekata.CoffeeMachine.control(new com.bourkha.coffemachinekata.Input(bufferedReader),coffeeMachine,new com.bourkha.coffemachinekata.View());
         assertThat(outputStream.toString()).isEqualToNormalizingNewlines(output);
     }
 
     static Stream<Arguments> command() {
-        String commun = "Inventory:\n" +
+        String commun = "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,10\n" +
                 "Cream,10\n" +
@@ -96,7 +98,7 @@ class CoffeeMachineAppTest {
                 "Your selection: ";
         String command_1 = commun + "Dispensing: Caffe Americano\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,10\n" +
                 "Cream,10\n" +
@@ -118,7 +120,7 @@ class CoffeeMachineAppTest {
                 "Your selection: ";
         String command_2 = commun + "Dispensing: Caffe Latte\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,10\n" +
                 "Cream,10\n" +
@@ -140,7 +142,7 @@ class CoffeeMachineAppTest {
                 "Your selection: ";
         String command_3 = commun + "Dispensing: Caffe Mocha\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,9\n" +
                 "Coffee,10\n" +
                 "Cream,10\n" +
@@ -162,7 +164,7 @@ class CoffeeMachineAppTest {
                 "Your selection: ";
         String command_4 = commun + "Dispensing: Cappuccino\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,10\n" +
                 "Cream,10\n" +
@@ -184,7 +186,7 @@ class CoffeeMachineAppTest {
                 "Your selection: ";
         String command_5 = commun + "Dispensing: Coffee\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,7\n" +
                 "Cream,9\n" +
@@ -206,7 +208,7 @@ class CoffeeMachineAppTest {
                 "Your selection: ";
         String command_6 = commun + "Dispensing: Decaf Coffee\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,10\n" +
                 "Cream,9\n" +
@@ -229,7 +231,7 @@ class CoffeeMachineAppTest {
         String command_7 = commun + "Invalid selection: 7. Try again: \n";
         String command_8 = commun + "Dispensing: Caffe Americano\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,10\n" +
                 "Cream,10\n" +
@@ -250,7 +252,7 @@ class CoffeeMachineAppTest {
                 "\n" +
                 "Your selection: Dispensing: Caffe Latte\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,10\n" +
                 "Cream,10\n" +
@@ -273,7 +275,7 @@ class CoffeeMachineAppTest {
         String reful = commun + commun;
         String outOfStock = commun + "Dispensing: Coffee\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,7\n" +
                 "Cream,9\n" +
@@ -294,7 +296,7 @@ class CoffeeMachineAppTest {
                 "\n" +
                 "Your selection: Dispensing: Coffee\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,4\n" +
                 "Cream,8\n" +
@@ -315,7 +317,7 @@ class CoffeeMachineAppTest {
                 "\n" +
                 "Your selection: Dispensing: Coffee\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,1\n" +
                 "Cream,7\n" +
@@ -336,7 +338,7 @@ class CoffeeMachineAppTest {
                 "\n" +
                 "Your selection: Out of stock: Coffee\n" +
                 "\n" +
-                "Inventory:\n" +
+                "com.bourkha.coffemachinekata.Inventory:\n" +
                 "Cocoa,10\n" +
                 "Coffee,1\n" +
                 "Cream,7\n" +

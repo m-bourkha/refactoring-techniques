@@ -1,7 +1,9 @@
+package com.bourkha.coffemachinekata;
+
 public class View {
 
     public void askForSelection(CoffeeMachine coffeeMachine) {
-        showMessage("Inventory:");
+        showMessage("com.bourkha.coffemachinekata.Inventory:");
         for (Stock stock : coffeeMachine.inventory) {
             showMessage(stock.getName() + "," + stock.getAmount());
         }

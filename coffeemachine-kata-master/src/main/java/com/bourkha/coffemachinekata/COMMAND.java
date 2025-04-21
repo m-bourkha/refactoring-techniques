@@ -1,3 +1,5 @@
+package com.bourkha.coffemachinekata;
+
 public enum COMMAND {
     EMPTY {
         @Override
@@ -23,8 +25,8 @@ public enum COMMAND {
         boolean exectute(String command, CoffeeMachine coffeeMachine, View view) {
             try {
                 make(command, coffeeMachine, view);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
+            } catch (IllegalArgumentException e) {
+                throw  e;
             }
             return true;
         }
@@ -36,19 +38,12 @@ public enum COMMAND {
         coffeeMachine.restock();
     }
 
-     void make(String command, CoffeeMachine coffeeMachine, View view) throws IllegalAccessException {
+     void make(String command, CoffeeMachine coffeeMachine, View view) {
         Drink drink = coffeeMachine.findDrinkById(Integer.parseInt(command));
         coffeeMachine.make(drink,
                 () -> view.showMessage("Out of stock: " + drink.getName() + "\n"),
                 () -> view.showMessage("Dispensing: " + drink.getName() + "\n"));
     }
 
-    public static COMMAND from(String command) {
-        return switch (command) {
-            case "" -> EMPTY;
-            case "q" -> QUIT;
-            case "r" -> RESTOCK;
-            default -> DEFAULT;
-        };
-    }
+
 }

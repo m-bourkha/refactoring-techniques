@@ -1,7 +1,7 @@
+package com.bourkha.coffemachinekata;
+
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.util.function.Function.*;
 import static java.util.stream.Collectors.groupingBy;

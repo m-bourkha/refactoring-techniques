@@ -1,3 +1,5 @@
+package com.bourkha.coffemachinekata;
+
 import java.util.ArrayList;
 
 public class CoffeeMachineApp {
@@ -17,7 +19,7 @@ public class CoffeeMachineApp {
         while (true) {
             try {
                 command = input.get();
-                boolean result = COMMAND.from(command).exectute(command, coffeeMachine, view);
+                boolean result = CommandFactory.from(command).exectute(command, coffeeMachine, view);
                 if(!result) return;
                 view.askForSelection(coffeeMachine);
             } catch (Exception e) {
