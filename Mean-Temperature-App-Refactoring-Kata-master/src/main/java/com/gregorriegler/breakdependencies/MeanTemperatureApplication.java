@@ -1,15 +1,14 @@
 package com.gregorriegler.breakdependencies;
 
-import com.jayway.jsonpath.JsonPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.time.Clock;
 import java.time.YearMonth;
 
 /**
  * Prints the mean temperatures of 3 recent months measured in Vienna over the last 50 years for comparison.
- *
+ * <p>
  * Example Output:
  * 1969-09 to 1969-12 mean temperature: 7.7 °C
  * 1970-09 to 1970-12 mean temperature: 8.2 °C
@@ -26,12 +25,22 @@ import java.time.YearMonth;
  * 2019-09 to 2019-12 mean temperature: 10.1 °C
  */
 public class MeanTemperatureApplication {
-    private static final Logger LOG = LoggerFactory.getLogger(MeanTemperatureApplication.class);
+        private static final Logger LOG = LoggerFactory.getLogger(MeanTemperatureApplication.class);
 
-    private static ThirdPartyService thirdPartyService = ThirdPartyService.getInstance();
+    private final Outliner outliner;
+    private final Statisttics statisttics;
+
+    public MeanTemperatureApplication(Outliner outliner, Statisttics statisttics) {
+        this.outliner = outliner;
+        this.statisttics = statisttics;
+    }
 
     public static void main(String[] args) {
-        YearMonth lastMonth = YearMonth.now().minusMonths(2); // the climate api might not yet have data for the last month
+        new MeanTemperatureApplication(new Outliner(), new Statisttics()).meanTemperature(Clock.systemDefaultZone());
+    }
+
+    public void meanTemperature(Clock clock) {
+        YearMonth lastMonth = YearMonth.now(clock).minusMonths(2); // the climate api might not yet have data for the last month
 
         for (int year = lastMonth.getYear() - 50; year <= lastMonth.getYear(); year++) {
             double sum = 0;
@@ -40,24 +49,22 @@ public class MeanTemperatureApplication {
             YearMonth end = lastMonth.withYear(year);
             YearMonth begin = end.minusMonths(3);
 
-            try {
-                URL url = new URL("https://api.meteostat.net/v1/history/monthly?station=11035&start=" + begin + "&end=+" + end + "&key=" + System.getProperty("key"));
-                double[] meanList = JsonPath.parse(url).read("$.data[*].temperature_mean", double[].class);
+            double[] meanList = statisttics.bestMeanList(begin, end);
 
-                for (int i = 0; i < meanList.length; i++) {
-                    double mean = meanList[i];
-                    sum += mean;
-                    count++;
-                }
+            for (int i = 0; i < meanList.length; i++) {
+                double mean = meanList[i];
+                sum += mean;
+                count++;
+            }
 
-                if (count > 0) {
-                    double mean = sum / count;
-                    thirdPartyService.outline(end, begin, mean);
-                }
-            } catch (Exception e) {
-                LOG.error("an error occured", e);
+            if (count > 0) {
+                double mean = sum / count;
+                outliner.outline(end, begin, mean);
             }
         }
+
     }
+
+
 
 }
