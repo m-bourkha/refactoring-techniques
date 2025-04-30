@@ -1,8 +1,10 @@
 Expenses Thu Jan 01 01:00:00 CET 1970
 Dinner	5000	 
 Dinner	5001	X
+Lauch	2000	 
+Lauch	2001	X
 Breakfast	1000	 
 Breakfast	1001	X
 Car Rental	50002	 
-Meal expenses: 12002
-Total expenses: 62004
+Meal expenses: 16003
+Total expenses: 66005

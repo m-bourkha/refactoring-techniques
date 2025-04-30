@@ -6,7 +6,8 @@ import java.util.List;
 enum ExpenseType {
     DINNER("Dinner", true, 5000),
     BREAKFAST("Breakfast", true, 1000),
-    CAR_RENTAL("Car Rental", false, Integer.MAX_VALUE);
+    CAR_RENTAL("Car Rental", false, Integer.MAX_VALUE),
+    LUNCH("Lauch", true , 2000);
 
     private final String name;
     private final boolean type;
