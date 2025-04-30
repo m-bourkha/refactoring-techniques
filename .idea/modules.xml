@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/expensereport-java.main.iml" filepath="$PROJECT_DIR$/.idea/modules/expensereport-java.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/expensereport-java.test.iml" filepath="$PROJECT_DIR$/.idea/modules/expensereport-java.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/refactoring-techniques.iml" filepath="$PROJECT_DIR$/.idea/refactoring-techniques.iml" />
     </modules>
   </component>
