@@ -1,13 +1,16 @@
 package com.nelkinda.training;
 
-import java.util.Date;
-import java.util.List;
+import lombok.Getter;
 
+import java.util.Date;
+
+@Getter
 enum ExpenseType {
     DINNER("Dinner", true, 5000),
     BREAKFAST("Breakfast", true, 1000),
     CAR_RENTAL("Car Rental", false, Integer.MAX_VALUE),
-    LUNCH("Lauch", true , 2000);
+    LUNCH("Lauch", true, 2000);
+
 
     private final String name;
     private final boolean type;
@@ -19,10 +22,6 @@ enum ExpenseType {
         this.limit = limit;
     }
 
-    String offLimit(Expense expense) {
-        return expense.amount > limit ? "X" : " ";
-    }
-
     String getName() {
         return name;
     }
@@ -32,42 +31,55 @@ enum ExpenseType {
     }
 }
 
-class Expense {
-    ExpenseType type;
-    int amount;
+record Expense(ExpenseType type, int amount) {
+
+    @Override
+    public String toString() {
+        return type().getName() + "\t" + amount() + "\t" + offLimit();
+    }
 
     boolean isMeal() {
-        return type.isMeal();
+        return type().isMeal();
     }
+
+    String offLimit() {
+        return amount() > type().getLimit() ? "X" : " ";
+    }
+
 }
 
 public class ExpenseReport {
-    public void printReport(List<Expense> expenses) {
-        printReport(expenses, new Date());
+
+    private final Expenses expenses;
+
+    public ExpenseReport(Expenses expenses) {
+        this.expenses = expenses;
     }
 
-    public void printReport(List<Expense> expenses, Date date) {
-        int total = 0;
-        int mealExpenses = 0;
+    public void printReport() {
+        printReport(new Date());
+    }
 
+    public void printReport(Date date) {
+
+        printHeader(date);
+
+        printDetails();
+
+        printFooter();
+    }
+
+    private void printHeader(Date date) {
         System.out.println("Expenses " + date);
+    }
 
-        for (Expense expense : expenses) {
-            if (expense.isMeal()) {
-                mealExpenses += expense.amount;
-            }
+    private  void printDetails() {
+        this.expenses.forEach(System.out::println);
+    }
 
-            String expenseName = expense.type.getName();
-
-            String mealOverExpensesMarker = expense.type.offLimit(expense);
-
-            System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-
-            total += expense.amount;
-        }
-
-        System.out.println("Meal expenses: " + mealExpenses);
-        System.out.println("Total expenses: " + total);
+    private  void printFooter() {
+        System.out.println("Meal expenses: " + this.expenses.getMealExpenses());
+        System.out.println("Total expenses: " + this.expenses.getTotal());
     }
 
 }

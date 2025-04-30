@@ -17,13 +17,14 @@ class ExpenseReportTest {
 
     @BeforeEach
     void setUp() {
-        expenseReport = new ExpenseReport();
+
         out = new ApprovalUtilities().writeSystemOutToStringBuffer();
     }
 
     @Test
     void test_empty_report() {
-        expenseReport.printReport(Collections.emptyList(), new Date(0));
+        expenseReport = new ExpenseReport(new Expenses(Collections.emptyList()));
+        expenseReport.printReport(new Date(0));
         Approvals.verify(out.toString());
     }
 
@@ -45,16 +46,14 @@ class ExpenseReportTest {
                 createExpense(ExpenseType.BREAKFAST, 1001),
                 createExpense(ExpenseType.CAR_RENTAL, 50002)
         );
-
-        expenseReport.printReport(expenses, new Date(0));
+        expenseReport = new ExpenseReport(new Expenses(expenses));
+        expenseReport.printReport(new Date(0));
         Approvals.verify(out);
 
     }
 
     private static Expense createExpense(ExpenseType expenseType, int amount) {
-        Expense expense = new Expense();
-        expense.type = expenseType;
-        expense.amount = amount;
-        return expense;
+
+        return new Expense(expenseType, amount);
     }
 }
