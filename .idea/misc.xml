@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/expensereport-java" />
+    <file type="web" url="file://$PROJECT_DIR$/refactoring-conditional-to-polymorphism-master/java" />
+    <file type="web" url="file://$PROJECT_DIR$/refactoring-embellishment-to-decorator-master/java" />
     <file type="web" url="file://$PROJECT_DIR$/refactoring-extract-value-object/java" />
   </component>
   <component name="MavenProjectsManager">
@@ -12,10 +15,12 @@
         <option value="$PROJECT_DIR$/GildedRose-Refactoring-Kata-master/pom.xml" />
         <option value="$PROJECT_DIR$/coffeemachine-kata-master/pom.xml" />
         <option value="$PROJECT_DIR$/Mean-Temperature-App-Refactoring-Kata-master/pom.xml" />
+        <option value="$PROJECT_DIR$/expensereport-kata/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/expensereport-kata/pom.xml" />
         <option value="$PROJECT_DIR$/extract-value-object/pom.xml" />
       </set>
     </option>
