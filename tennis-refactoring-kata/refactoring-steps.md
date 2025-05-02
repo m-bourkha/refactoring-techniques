@@ -1,14 +1,16 @@
-##  Tennis kata's Refactoring steps
-
-1. ### Code smell
-   1. name of variables
-   2. Long method getScore
-   3. Apply Single responsibility (winOrAdvantage)
-   4. Primitive Obsession
-   5. conditional with switch
-2. ### Apply refactroing techniques
-   1. rename variable
-   2. remove temp variable(replace them with return)
-   2. extract methods
-   3. decompose for loop
-   3. decompose conditionals
+#  Tennis kata's Refactoring steps
+*** 
+ ## TennisGame 1
+   1. ### Code smell
+      * name of variables
+      * Long method getScore
+      * Apply Single responsibility (winOrAdvantage)
+      * Primitive Obsession
+      * conditional with switch
+   2. ### Apply refactroing techniques
+      * rename variable
+      * remove temp variable(replace them with return)
+      * extract methods
+      * decompose for loop
+      * Extract class (for primitive obsession)
+      * decompose conditionals

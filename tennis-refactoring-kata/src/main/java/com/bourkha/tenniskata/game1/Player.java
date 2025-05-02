@@ -1,23 +1,23 @@
 package com.bourkha.tenniskata.game1;
 
 public class Player {
-    private int playerScore;
+    private int score;
     private final String name;
 
     public Player(String name) {
         this.name = name;
-        playerScore = 0;
+        score = 0;
     }
 
-    public int getPlayerScore() {
-        return playerScore;
+    public int getScore() {
+        return score;
     }
 
-    public String getPlayerName() {
+    public String getName() {
         return name;
     }
 
     void incrementScore() {
-        this.playerScore++;
+        this.score++;
     }
 }
