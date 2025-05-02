@@ -2,6 +2,8 @@ package com.bourkha.tenniskata.game1;
 
 import com.bourkha.tenniskata.TennisGame;
 
+import java.util.Objects;
+
 public class TennisGame1 implements TennisGame {
 
     private int player1Score = 0;
@@ -15,7 +17,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
+        if (Objects.equals(playerName, player1Name))
             player1Score += 1;
         else
             player2Score += 1;
@@ -48,10 +50,10 @@ public class TennisGame1 implements TennisGame {
 
     private String deuceScore() {
         int minusResult = player1Score - player2Score;
-        if (minusResult == 1) return "Advantage player1";
-        else if (minusResult == -1) return "Advantage player2";
-        else if (minusResult >= 2) return "Win for player1";
-        else return "Win for player2";
+        if (minusResult == 1) return "Advantage "+player1Name;
+        else if (minusResult == -1) return "Advantage "+ player2Name;
+        else if (minusResult >= 2) return "Win for "+player1Name;
+        else return "Win for "+ player2Name;
     }
 
     private String tieScore() {
