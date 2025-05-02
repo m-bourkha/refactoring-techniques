@@ -8,4 +8,5 @@
    1. rename variable
    2. remove temp variable(replace them with return)
    2. extract methods
+   3. decompose for loop
    3. decompose conditionals

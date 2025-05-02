@@ -22,7 +22,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
         if (player1Score == player2Score) {
             return tieScore();
         } else if (player1Score >= 4 || player2Score >= 4) {
@@ -33,31 +32,18 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String onGoingscore() {
-        int tempScore;
-        String score1 = "";
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = player1Score;
-            else {
-                score1 += "-";
-                tempScore = player2Score;
-            }
 
-            switch (tempScore) {
-                case 0:
-                    score1 += "Love";
-                    break;
-                case 1:
-                    score1 += "Fifteen";
-                    break;
-                case 2:
-                    score1 += "Thirty";
-                    break;
-                case 3:
-                    score1 += "Forty";
-                    break;
-            }
-        }
-        return score1;
+        return ongoingScore(player1Score) + "-" + ongoingScore(player2Score);
+    }
+
+    private static String ongoingScore(int playerScore) {
+        return switch (playerScore) {
+            case 0 ->  "Love";
+            case 1 ->  "Fifteen";
+            case 2 ->  "Thirty";
+            case 3 ->  "Forty";
+            default -> "";
+        } ;
     }
 
     private String deuceScore() {
