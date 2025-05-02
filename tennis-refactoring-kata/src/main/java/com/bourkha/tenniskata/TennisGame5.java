@@ -1,3 +1,5 @@
+package com.bourkha.tenniskata;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,13 +54,13 @@ public class TennisGame5 implements TennisGame {
         lookup.put(Map.entry(3, 0), "Forty-Love");
         lookup.put(Map.entry(3, 1), "Forty-Fifteen");
         lookup.put(Map.entry(3, 2), "Forty-Thirty");
-        lookup.put(Map.entry(3, 3), "Deuce");
+        lookup.put(Map.entry(3, 3), "com.bourkha.tenniskata.Deuce");
         lookup.put(Map.entry(3, 4), "Advantage player2");
         lookup.put(Map.entry(4, 0), "Win for player1");
         lookup.put(Map.entry(4, 1), "Win for player1");
         lookup.put(Map.entry(4, 2), "Win for player1");
         lookup.put(Map.entry(4, 3), "Advantage player1");
-        lookup.put(Map.entry(4, 4), "Deuce");
+        lookup.put(Map.entry(4, 4), "com.bourkha.tenniskata.Deuce");
 
         var entry = Map.entry(p1, p2);
         if (lookup.containsKey(entry)) {

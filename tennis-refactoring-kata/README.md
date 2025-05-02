@@ -11,7 +11,7 @@ It uses Java 21 and the [Maven Wrapper](https://maven.apache.org/wrapper/) to bu
 Prerequisites: a Java 21 Development Kit must be installed.
 
 ## Code Reading Practice
-Here is a list of github urls of all the TennisGame Java classes:
+Here is a list of github urls of all the com.bourkha.tenniskata.TennisGame Java classes:
 
 * https://github.com/emilybache/Tennis-Refactoring-Kata/blob/main/java/src/main/java/TennisGame1.java
 * https://github.com/emilybache/Tennis-Refactoring-Kata/blob/main/java/src/main/java/TennisGame2.java

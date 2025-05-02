@@ -1,10 +1,12 @@
-public class TennisGame7 implements TennisGame {
+package com.bourkha.tenniskata;
+
+public class TennisGame6 implements TennisGame {
     private final String player1Name;
     private final String player2Name;
     private int player1Score;
     private int player2Score;
 
-    public TennisGame7(String player1Name, String player2Name) {
+    public TennisGame6(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
     }
@@ -20,52 +22,53 @@ public class TennisGame7 implements TennisGame {
 
     public String getScore()
     {
-        String result = "Current score: ";
+        String result;
 
         if (player1Score == player2Score)
         {
             // tie score
+            String tieScore;
             switch (player1Score)
             {
                 case 0:
-                    result += "Love-All";
+                    tieScore = "Love-All";
                     break;
                 case 1:
-                    result += "Fifteen-All";
+                    tieScore = "Fifteen-All";
                     break;
                 case 2:
-                    result += "Thirty-All";
+                    tieScore = "Thirty-All";
                     break;
                 default:
-                    result += "Deuce";
+                    tieScore = "com.bourkha.tenniskata.Deuce";
                     break;
             }
+
+            result = tieScore;
         }
         else if (player1Score >= 4 || player2Score >= 4)
         {
             // end-game score
+            String endGameScore;
+
             if (player1Score - player2Score == 1) {
-                result += "Advantage " + player1Name;
+                endGameScore = "Advantage " + player1Name;
             } else if (player1Score - player2Score == -1) {
-                result += "Advantage " + player2Name;
+                endGameScore = "Advantage " + player2Name;
             } else if (player1Score - player2Score >= 2) {
-                result += "Win for " + player1Name;
+                endGameScore = "Win for " + player1Name;
             } else {
-                result += "Win for " + player2Name;
+                endGameScore = "Win for " + player2Name;
             }
+
+            result = endGameScore;
         }
         else
         {
             // regular score
-            result +=  switch (player1Score)
-            {
-                case 0 -> "Love";
-                case 1 -> "Fifteen";
-                case 2 -> "Thirty";
-                default -> "Forty";
-            };
-            result += "-";
-            result +=  switch (player2Score)
+            String regularScore;
+
+            String score1 =  switch (player1Score)
             {
                 case 0 -> "Love";
                 case 1 -> "Fifteen";
@@ -73,8 +76,19 @@ public class TennisGame7 implements TennisGame {
                 default -> "Forty";
             };
 
+            var score2 =  switch (player2Score)
+            {
+                case 0 -> "Love";
+                case 1 -> "Fifteen";
+                case 2 -> "Thirty";
+                default -> "Forty";
+            };
+
+            regularScore = score1 + "-" + score2;
+
+            result = regularScore;
         }
 
-        return result + ", enjoy your game!";
+        return result;
     }
 }

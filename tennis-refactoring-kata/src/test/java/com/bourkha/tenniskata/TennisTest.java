@@ -1,3 +1,6 @@
+package com.bourkha.tenniskata;
+
+import com.bourkha.tenniskata.game1.TennisGame1;
 import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.stream.Stream;

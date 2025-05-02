@@ -1,3 +1,5 @@
+package com.bourkha.tenniskata;
+
 public class TennisGame4 implements TennisGame {
 
     int serverScore;
@@ -84,7 +86,7 @@ class Deuce implements ResultProvider {
     @Override
     public TennisResult getResult() {
         if (game.isDeuce())
-            return new TennisResult("Deuce", "");
+            return new TennisResult("com.bourkha.tenniskata.Deuce", "");
         return this.nextResult.getResult();
     }
 }

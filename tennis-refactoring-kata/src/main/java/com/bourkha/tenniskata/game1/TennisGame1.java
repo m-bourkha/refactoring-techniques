@@ -1,3 +1,6 @@
+package com.bourkha.tenniskata.game1;
+
+import com.bourkha.tenniskata.TennisGame;
 
 public class TennisGame1 implements TennisGame {
     
