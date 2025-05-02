@@ -13,11 +13,11 @@ public class Player {
         return playerScore;
     }
 
-    public void setPlayerScore(int player1Score) {
-        this.playerScore = player1Score;
-    }
-
     public String getPlayerName() {
         return name;
+    }
+
+    void incrementScore() {
+        this.playerScore++;
     }
 }

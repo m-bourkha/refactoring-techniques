@@ -2,8 +2,6 @@ package com.bourkha.tenniskata.game1;
 
 import com.bourkha.tenniskata.TennisGame;
 
-import java.util.Objects;
-
 public class TennisGame1 implements TennisGame {
 
     private final Player player1;
@@ -15,10 +13,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (Objects.equals(playerName, player1.getPlayerName()))
-            player1.setPlayerScore(player1.getPlayerScore() + 1);
-        else
-            this.player2.setPlayerScore(player2.getPlayerScore() + 1);
+        findPlayerByName(playerName).incrementScore();
+    }
+
+    private Player findPlayerByName(String playerName) {
+        return playerName.equals(player1.getPlayerName()) ? player1 : player2;
     }
 
     public String getScore() {
