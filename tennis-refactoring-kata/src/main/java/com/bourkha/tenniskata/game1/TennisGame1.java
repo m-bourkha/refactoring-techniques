@@ -26,11 +26,21 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         if (player1Score == player2Score) {
             return tieScore();
-        } else if (player1Score >= 4 || player2Score >= 4) {
-            return deuceScore();
+        } else if (isAdvantage(player1Score, player2Score) && hasOnePointAdvantage(player1Score, player2Score)) {
+            return advantageScore();
+        } else if(isAdvantage(player1Score, player2Score) && Math.abs(player1Score-player2Score) >= 2) {
+             return winScore(player1Score, player2Score);
         } else {
            return onGoingscore();
         }
+    }
+
+    private boolean hasOnePointAdvantage(int player1Score, int player2Score) {
+        return Math.abs(player1Score - player2Score) == 1;
+    }
+
+    private boolean isAdvantage(int player1Score1, int player2Score1) {
+        return player1Score1 >= 4 || player2Score1 >= 4;
     }
 
     private String onGoingscore() {
@@ -48,12 +58,15 @@ public class TennisGame1 implements TennisGame {
         } ;
     }
 
-    private String deuceScore() {
+    private String advantageScore() {
         int minusResult = player1Score - player2Score;
         if (minusResult == 1) return "Advantage "+player1Name;
-        else if (minusResult == -1) return "Advantage "+ player2Name;
-        else if (minusResult >= 2) return "Win for "+player1Name;
-        else return "Win for "+ player2Name;
+        return "Advantage "+ player2Name;
+    }
+
+    private String winScore(int player1Score, int player2Score) {
+        if (player1Score-player2Score >= 2) return "Win for " + player1Name;
+       else return "Win for " + player2Name;
     }
 
     private String tieScore() {

@@ -3,7 +3,9 @@
 1. ### Code smell
    1. name of variables
    2. Long method getScore
-   3. conditional with switch
+   3. Primitive Obsession
+   4. Apply Single responsibility (winOrAdvantage)
+   5. conditional with switch
 2. ### Apply refactroing techniques
    1. rename variable
    2. remove temp variable(replace them with return)
