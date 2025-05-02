@@ -3,8 +3,8 @@
 1. ### Code smell
    1. name of variables
    2. Long method getScore
-   3. Primitive Obsession
-   4. Apply Single responsibility (winOrAdvantage)
+   3. Apply Single responsibility (winOrAdvantage)
+   4. Primitive Obsession
    5. conditional with switch
 2. ### Apply refactroing techniques
    1. rename variable

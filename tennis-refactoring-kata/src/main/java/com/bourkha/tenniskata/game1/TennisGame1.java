@@ -6,32 +6,32 @@ import java.util.Objects;
 
 public class TennisGame1 implements TennisGame {
 
-    private int player1Score = 0;
-    private int player2Score = 0;
-    private String player1Name;
-    private String player2Name;
+    private final Player player1;
+    private final Player player2;
 
     public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+        this.player1 = new Player(player1Name);
+        this.player2 = new Player(player2Name);
     }
 
     public void wonPoint(String playerName) {
-        if (Objects.equals(playerName, player1Name))
-            player1Score += 1;
+        if (Objects.equals(playerName, player1.getPlayerName()))
+            player1.setPlayerScore(player1.getPlayerScore() + 1);
         else
-            player2Score += 1;
+            this.player2.setPlayerScore(player2.getPlayerScore() + 1);
     }
 
     public String getScore() {
-        if (player1Score == player2Score) {
+        if (player1.getPlayerScore() == player2.getPlayerScore()) {
             return tieScore();
-        } else if (isAdvantage(player1Score, player2Score) && hasOnePointAdvantage(player1Score, player2Score)) {
+        } else if (isAdvantage(player1.getPlayerScore(), player2.getPlayerScore()) && hasOnePointAdvantage(player1.getPlayerScore(), player2.getPlayerScore())) {
             return advantageScore();
-        } else if(isAdvantage(player1Score, player2Score) && Math.abs(player1Score-player2Score) >= 2) {
-             return winScore(player1Score, player2Score);
         } else {
-           return onGoingscore();
+            if (isAdvantage(player1.getPlayerScore(), player2.getPlayerScore()) && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) >= 2) {
+                return winScore(player1.getPlayerScore(), player2.getPlayerScore());
+            } else {
+                return onGoingscore();
+            }
         }
     }
 
@@ -45,7 +45,7 @@ public class TennisGame1 implements TennisGame {
 
     private String onGoingscore() {
 
-        return ongoingScore(player1Score) + "-" + ongoingScore(player2Score);
+        return ongoingScore(player1.getPlayerScore()) + "-" + ongoingScore(player2.getPlayerScore());
     }
 
     private static String ongoingScore(int playerScore) {
@@ -59,22 +59,23 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String advantageScore() {
-        int minusResult = player1Score - player2Score;
-        if (minusResult == 1) return "Advantage "+player1Name;
-        return "Advantage "+ player2Name;
+        int minusResult = player1.getPlayerScore() - player2.getPlayerScore();
+        if (minusResult == 1) return "Advantage "+ player1.getPlayerName();
+        return "Advantage "+ this.player2.getPlayerName();
     }
 
     private String winScore(int player1Score, int player2Score) {
-        if (player1Score-player2Score >= 2) return "Win for " + player1Name;
-       else return "Win for " + player2Name;
+        if (player1Score-player2Score >= 2) return "Win for " + player1.getPlayerName();
+       else return "Win for " + this.player2.getPlayerName();
     }
 
     private String tieScore() {
-        return switch (player1Score) {
+        return switch (player1.getPlayerScore()) {
             case 0 -> "Love-All";
             case 1 -> "Fifteen-All";
             case 2 -> "Thirty-All";
             default -> "Deuce";
         };
     }
+
 }
