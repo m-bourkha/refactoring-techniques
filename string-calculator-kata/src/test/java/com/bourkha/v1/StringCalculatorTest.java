@@ -1,4 +1,4 @@
-package com.bourkha;
+package com.bourkha.v1;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 class StringCalculatorTest {
 
     public static final String SEPARATORS = "[,\n]+";
-    private  StringCalculator stringCalculator ;
+    private StringCalculator stringCalculator ;
 
 
     @BeforeEach

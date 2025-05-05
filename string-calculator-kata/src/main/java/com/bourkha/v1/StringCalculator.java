@@ -1,4 +1,4 @@
-package com.bourkha;
+package com.bourkha.v1;
 
 import lombok.extern.slf4j.Slf4j;
 

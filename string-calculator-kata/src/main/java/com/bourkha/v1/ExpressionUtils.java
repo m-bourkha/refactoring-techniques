@@ -1,4 +1,4 @@
-package com.bourkha;
+package com.bourkha.v1;
 
 import org.apache.commons.lang3.StringUtils;
 
